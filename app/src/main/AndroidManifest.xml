@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.androguide.zram.settings"
+    package="com.android.zram"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -11,8 +11,9 @@
         android:icon="@drawable/ic_launcher"
         android:label="zRam Settings"
         android:theme="@style/AppTheme">
+
         <activity
-            android:name="com.androguide.zram.settings.Zram"
+            android:name="com.android.zram.Zram"
             android:label="zRam Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

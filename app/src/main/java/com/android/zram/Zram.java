@@ -1,4 +1,4 @@
-package com.androguide.zram.settings;
+package com.android.zram;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,7 +13,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class Zram extends Activity implements OnClickListener {
-
     private EditText input;
 
     @Override
