@@ -15,7 +15,6 @@ import java.io.IOException;
 public class Zram extends Activity implements OnClickListener {
 
     private EditText input;
-    private Button apply;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,7 +22,7 @@ public class Zram extends Activity implements OnClickListener {
         setContentView(R.layout.zram);
 
         input = findViewById(R.id.userInput);
-        apply = findViewById(R.id.apply);
+        Button apply = findViewById(R.id.apply);
         apply.setOnClickListener(this);
     }
 
@@ -32,27 +31,23 @@ public class Zram extends Activity implements OnClickListener {
 
         int value = Integer.parseInt(input.getText().toString());
 
-        // Arbitrary value, I don't know the maximum zRam compression (if
-        // there's one)
+        // Arbitrary value, I don't know the maximum zRam compression
+        // (if there's one)
         if (value > 200) {
-
             Toast.makeText(
                     this,
                     "The value you entered is too high and may cause problems! Please reduce it",
                     Toast.LENGTH_LONG).show();
         } else {
-
             try {
                 Process process;
                 process = Runtime.getRuntime().exec("su");
 
-                DataOutputStream os = new DataOutputStream(
-                        process.getOutputStream());
+                DataOutputStream os = new DataOutputStream(process.getOutputStream());
 
                 os.writeBytes("busybox mkswap /dev/block/zram0" + "\n");
                 os.writeBytes("busybox swapon /dev/block/zram0" + "\n");
-                os.writeBytes("echo $((1024*1024*" + value
-                        + ")) > /sys/block/zram0/disksize" + "\n");
+                os.writeBytes("echo $((1024*1024*" + value + ")) > /sys/block/zram0/disksize" + "\n");
 
                 os.writeBytes("exit\n");
                 os.flush();
